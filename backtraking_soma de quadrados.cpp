@@ -20,7 +20,9 @@ void somaDeQuadrados(int *V, int n, int nq, int aux){
 	}
 }
 void imprimir(int *V){
-	cout<<"{";		for(int i = 0; i<=3 ; i++) cout<<V[i]<<" ";		cout<<"} ";
+	cout<<"{";		
+	for(int i = 0; i<=3 ; i++) cout<<V[i]<<" ";		
+	cout<<"} ";
 }
 int main(){
 	int V[4]= {0,0,0,0};
