@@ -9,49 +9,48 @@ vector<int> mergeSort(vector<int> N, int start, int end);
 int main() {
     vector<int> list = { 16, 12071, 2, 77, -1, 40, 5, 10, 37 };
     int size = list.size() - 1;
-    vector<int> resp = mergeSort(list, 0, size);
+    vector<int> result = mergeSort(list, 0, size);
 
     for (int n = 0; n <= size; ++n)
-        printf("%d ", resp[n]);
+        printf("%d ", result[n]);
 
     return 0;
 }
 
-vector<int> merge(vector<int> N, int p, int half, int r) {
+vector<int> merge(vector<int> N, int startN, int halfN, int endN) {
 
-    vector<int> L, R; // L = Left e R = Right
+    vector<int> Left, Right;
 
-    int Nl = half - p + 1, Nr = r - half; // tamanho dos pedaços de cada subLista
-    int Pl = 0, Pr = 0; // ponteiros para andar por cada elemento das sublistas
+    int leftSize = halfN - startN + 1;
+    int rightSize = endN - halfN;
+    int leftPointer = 0, rightPointer = 0;
 
-    // popula a sublista L e R
-    for (int i = 1; i <= Nl; i++) {
-        L.push_back(N[p + i - 1]);
+    for (int i = 1; i <= leftSize; i++) {
+        Left.push_back(N[startN + i - 1]);
     }
 
-    for (int i = 1; i <= Nr; i++) {
-        R.push_back(N[half + i]);
+    for (int i = 1; i <= rightSize; i++) {
+        Right.push_back(N[halfN + i]);
     }
 
-    // merge entre as sublistas
-    int i = p; // ponteiro pra a lista principal
+    int nPointer = startN;
 
-    while (Pl < Nl && Pr < Nr && i <= r) {
-        if (L[Pl] <= R[Pr]) {
-            N[i] = L[Pl++];
+    while (leftPointer < leftSize && rightPointer < rightSize && nPointer <= endN) {
+        if (Left[leftPointer] <= Right[rightPointer]) {
+            N[nPointer] = Left[leftPointer++];
         }
         else {
-            N[i] = R[Pr++];
+            N[nPointer] = Right[rightPointer++];
         }
-        i++;
+        nPointer++;
     }
 
-    while (Pl < Nl) {
-        N[i++] = L[Pl++];
+    while (leftPointer < leftSize) {
+        N[nPointer++] = Left[leftPointer++];
     }
 
-    while (Pr < Nr) {
-        N[i++] = R[Pr++];
+    while (rightPointer < rightSize) {
+        N[nPointer++] = Right[rightPointer++];
     }
 
     return N;
